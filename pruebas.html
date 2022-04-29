@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=d, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .Container {
+            display: Flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 400px;
+        }
+        p {
+            text-align: center;
+        }
+        input {
+            align-items: center;
+        }
+        .change-hour {
+            border-radius: 8px;
+            width: 200px;
+            cursor: pointer;
+            height: 50px;
+            align-self: center;
+        }
+    </style>
+    <script>
+        var dianoche = 12;
+    function startTime(){ 
+        today=new Date(); 
+        h=today.getHours(); 
+        m=today.getMinutes(); 
+        s=today.getSeconds(); 
+        m=checkTime(m); 
+        s=checkTime(s); 
+        if (h>12) {
+            h = h - dianoche;
+            var late = "PM";
+        } else {
+            var late = "AM";
+            return;
+        }
+        document.getElementById('clock').innerHTML=h+":"+m+":"+s+" "+late; 
+        t=setTimeout('startTime()',500);
+    } 
+    function checkTime(i) {
+        if (i<10) {
+        i="0" + i;
+    }
+    return i;
+    } 
+    window.onload=function(){
+    startTime();
+}
+    function militarhour(){
+        dianoche = 0;
+    }
+    </script>
+
+</head>
+<body>
+    <div class="Container">
+        <div><p>A Simple Digital Clock</p></div>
+        <div class="myclock">
+            <p id="clock"></p>
+        </div>
+        <div>
+            <p>
+                <script>
+                var meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); 
+                var diasSemana = new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"); 
+                var f=new Date(); 
+                document.write(diasSemana[f.getDay()] + " " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear());  
+                </script>  
+            </p>
+        </div>  
+        <input type="button" value="Switch to Military Time Format" class="change-hour" onclick="startTime(dianoche=0)">   
+    </div>
+</body>
+</html>

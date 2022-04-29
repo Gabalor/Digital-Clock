@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=d, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            background: cadetblue;
+            margin: 0px;
+            font-family: 'Quicksand', sans-serif;
+        }
+        .Container {
+            display: Flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 500px;
+        }
+        p {
+            text-align: center;
+        }
+        input {
+            align-items: center;
+            border: none;
+            border-radius: 16px;
+            width: 200px;
+            cursor: pointer;
+            height: 50px;
+            align-self: center;
+            margin-top: 8px;
+            background: white;
+        }
+        .myclock {
+            font-size: 40px;
+            color: white;
+            margin: 0px;            
+        }
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 32px;
+        }
+    </style>
+    <script>
+        var militar = 0;
+        var late;
+    function startTime(){ 
+        today=new Date(); 
+        h=today.getHours(); 
+        m=today.getMinutes(); 
+        s=today.getSeconds(); 
+        m=checkTime(m); 
+        s=checkTime(s); 
+        if (militar == 0) {
+            if (h>12) {
+                h = h - 12;
+                late = "PM";
+            }else if (h == 0) {
+                h = 12;
+                late = "AM";
+            } else {
+            late = "AM";
+            }
+        }else {
+            late = "HRS";
+        }
+        document.getElementById('clock').innerHTML=h+":"+m+":"+s+" "+late; 
+        t=setTimeout('startTime()',500);
+} 
+    function checkTime(i) {
+        if (i<10) {
+        i="0" + i;
+    }
+    return i;
+    } 
+    window.onload=function(){
+    startTime();
+} 
+    </script>
+
+</head>
+<body>
+    <div class="Container">
+        <div><p class="title">A Simple Digital Clock</p></div>
+        <div class="myclock">
+            <p id="clock" class="myclock"></p>
+        </div>
+        <div>
+            <p>
+                <script>
+                    var dia;
+                var meses = new Array ("January","February","March","April","May","June","July","August","September","October","November","December"); 
+                var diasSemana = new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"); 
+                var f=new Date(); 
+                if (f.getDate() == 1) {
+                    dia = "st";
+                }else if (f.getDate() == 21) {
+                    dia = "st";
+                }else if (f.getDate() == 31) {
+                    dia = "st";
+                }else if (f.getDate() == 2) {
+                    dia = "nd";
+                }else if (f.getDate() == 21) {
+                    dia = "nd";
+                }else if (f.getDate() == 3) {
+                    dia = "rd";
+                }else if (f.getDate() == 23) {
+                    dia = "rd";
+                }else {
+                    dia = "th";
+                }
+                document.write(diasSemana[f.getDay()] + ", " + meses[f.getMonth()] + " " + f.getDate() + dia + " " + f.getFullYear());  
+                </script>  
+            </p>
+        </div>  
+        <input type="button" value="Switch to Military Time Format" class="change-hour" onclick="startTime(militar=1)"> 
+        <input type="button" value="Switch to Regular Time Format" class="change-hourR" onclick="startTime(militar=0)">    
+    </div>
+</body>
+</html>
